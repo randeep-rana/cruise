@@ -1,49 +1,77 @@
-"use client"
-
 import { useState } from "react"
-import { FormField } from "@/app/(web)/auth/laksh/UnifiedSignupForm"
+import { FormField } from "@/app/auth/UnifiedSignupForm" 
+import { USERS } from "@/constant"
 import * as Form from "@radix-ui/react-form"
 import { Check, UserPlus } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { Button } from "../../ui/button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog"
-import { Input } from "../../ui/input"
 
 const genders = ["Male", "Female", "Other"]
 const relations = ["Father", "Mother", "Spouse", "Sibling", "Child", "Friend"]
 
+export const getInitialPassengerForm = (userType) => ({
+  firstName: "",
+  lastName: "",
+  gender: "",
+  dob: "",
+  permitId: userType === USERS.TOURIST ? "" : undefined,
+  relation: [USERS.RESIDENT, USERS.NON_RESIDENT, USERS.GOVT_OFFICIAL, USERS.STUDENT].includes(userType) ? "" : undefined,
+  idCardNo: userType === USERS.GOVT_OFFICIAL ? "" : undefined,
+  validTill: userType === USERS.GOVT_OFFICIAL ? "" : undefined,
+  isDisabled: false,
+  pwdId: "",
+})
+
 export function AddPassenger({
-  // addPilgrim,
+  userType,
   disabled = false,
   heading,
   actionButtonLabel,
   modalTogglerLabel,
-
   actionBtnType = null,
+}: {
+  userType: string
+  disabled?: boolean
+  heading: string
+  actionButtonLabel: string
+  modalTogglerLabel: string
+  actionBtnType?: "submit" | "button" | null
 }) {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    gender: "",
-    relation: "",
-    dob: "",
-    aadhaar: "",
-  })
-
+  const [formData, setFormData] = useState(() => getInitialPassengerForm(userType))
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [open, setOpen] = useState(false)
 
-  const handleChange = (field: keyof typeof formData, value: string) => {
+  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setErrors((prev) => ({ ...prev, [field]: "" }))
   }
 
   const validate = () => {
     const newErrors: typeof errors = {}
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required."
+    if (!formData.firstName?.trim()) newErrors.firstName = "First name is required."
+    if (!formData.lastName?.trim()) newErrors.lastName = "Last name is required."
     if (!formData.gender) newErrors.gender = "Select gender."
-    if (!formData.relation) newErrors.relation = "Select relation."
     if (!formData.dob) newErrors.dob = "Date of birth is required."
-    if (!/^\d{12}$/.test(formData.aadhaar.replace(/\s/g, ""))) newErrors.aadhaar = "Aadhaar must be 12 digits."
+
+    if (userType === USERS.TOURIST && !formData.permitId?.trim()) {
+      newErrors.permitId = "Permit ID is required."
+    }
+
+    if ([USERS.RESIDENT, USERS.NON_RESIDENT, USERS.GOVT_OFFICIAL, USERS.STUDENT].includes(userType)) {
+      if (!formData.relation) newErrors.relation = "Select relation."
+    }
+
+    if (userType === USERS.GOVT_OFFICIAL) {
+      if (!formData.idCardNo?.trim()) newErrors.idCardNo = "ID Card No. is required."
+      if (!formData.validTill?.trim()) newErrors.validTill = "Validity is required."
+    }
+
+    if (formData.isDisabled && !formData.pwdId?.trim()) {
+      newErrors.pwdId = "PwD ID is required."
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -51,19 +79,12 @@ export function AddPassenger({
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault()
     if (!validate()) return
-    console.log("🧾 Passenger added:", formData)
-    // addPilgrim(formData)
+    console.log("✅ Passenger added:", formData)
     setOpen(false)
   }
 
   const handleResetDetails = () => {
-    setFormData({
-      fullName: "",
-      gender: "",
-      relation: "",
-      dob: "",
-      aadhaar: "",
-    })
+    setFormData(getInitialPassengerForm(userType))
     setErrors({})
   }
 
@@ -81,56 +102,62 @@ export function AddPassenger({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="w-[">
+      <DialogContent className="max-h-screen w-full overflow-y-auto md:max-w-[50vw]">
         <DialogHeader className="border-b pb-2">
           <DialogTitle className="text-brand-600">{heading}</DialogTitle>
         </DialogHeader>
 
         <Form.Root onSubmit={handleSubmit} className="space-y-4 text-base">
-          <div className="max-w-full space-y-6 rounded-xl p-2">
-            {/* Full Name + Gender */}
-            <div className="flex flex-col gap-3 md:grid md:grid-cols-3">
-              <FormField
-                name="fullName"
-                label="Full Name"
-                value={formData.fullName}
-                onChange={handleChange}
-                error={errors.fullName}
-                className="w-full md:w-1/2"
-              />
-              <Form.Field name="gender" className="w-full md:w-1/2">
-                <Form.Label className="mb-1 block font-medium">Gender</Form.Label>
-                <Form.Control asChild>
-                  <select
-                    className="w-full rounded border px-3 py-2"
-                    value={formData.gender}
-                    onChange={(e) => handleChange("gender", e.target.value)}
-                  >
-                    <option value="">Select</option>
-                    {genders.map((g) => (
-                      <option key={g} value={g}>
-                        {g}
-                      </option>
-                    ))}
-                  </select>
-                </Form.Control>
-                {errors.gender && <p className="text-sm text-error">{errors.gender}</p>}
-              </Form.Field>
-            </div>
+          <div className="grid grid-cols-1 gap-4 rounded-xl p-2 md:grid-cols-3">
+            <FormField
+              name="firstName"
+              label="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              error={errors.firstName}
+              placeholder="Enter your name"
+              className="w-full"
+            />
 
-            {/* Relation + DOB */}
-            <div className="flex flex-col gap-3 md:flex-row">
-              <Form.Field name="relation" className="w-full md:w-1/2">
+            <FormField
+              name="lastName"
+              label="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+              error={errors.lastName}
+              placeholder="Enter your name"
+              className="w-full"
+            />
+
+            <Form.Field name="gender" className="w-full">
+              <Form.Label className="mb-1 block font-medium">Gender</Form.Label>
+              <Form.Control asChild>
+                <select
+                  className={cn("w-full rounded border px-3 py-2", !formData.gender && "text-gray-400")}
+                  onChange={(e) => handleChange("gender", e.target.value)}
+                >
+                  <option value="">Select gender</option>
+                  {genders.map((g) => (
+                    <option key={g} value={g} className="text-black">
+                      {g}
+                    </option>
+                  ))}
+                </select>
+              </Form.Control>
+              {errors.gender && <p className="text-sm text-error">{errors.gender}</p>}
+            </Form.Field>
+
+            {[USERS.RESIDENT, USERS.NON_RESIDENT, USERS.GOVT_OFFICIAL, USERS.STUDENT].includes(userType) && (
+              <Form.Field name="relation" className="w-full">
                 <Form.Label className="mb-1 block font-medium">Relation</Form.Label>
                 <Form.Control asChild>
                   <select
-                    className="w-full rounded border px-3 py-2"
-                    value={formData.relation}
+                    className={cn("w-full rounded border px-3 py-2", !formData.relation && "text-gray-400")}
                     onChange={(e) => handleChange("relation", e.target.value)}
                   >
-                    <option value="">Select</option>
+                    <option value="">Select relation</option>
                     {relations.map((r) => (
-                      <option key={r} value={r}>
+                      <option key={r} value={r} className="text-black">
                         {r}
                       </option>
                     ))}
@@ -138,39 +165,80 @@ export function AddPassenger({
                 </Form.Control>
                 {errors.relation && <p className="text-sm text-error">{errors.relation}</p>}
               </Form.Field>
+            )}
 
+            <FormField
+              name="dob"
+              label="Date of Birth"
+              type="date"
+              value={formData.dob}
+              onChange={handleChange}
+              error={errors.dob}
+              className="w-full"
+            />
+
+            {userType === USERS.TOURIST && (
               <FormField
-                name="dob"
-                label="Date of Birth"
-                type="date"
-                value={formData.dob}
+                name="permitId"
+                label="Permit ID"
+                value={formData.permitId}
                 onChange={handleChange}
-                error={errors.dob}
-                className="w-full md:w-1/2"
+                error={errors.permitId}
+                placeholder="Add Permit ID"
+                className="w-full"
               />
-            </div>
+            )}
 
-            {/* Aadhaar */}
-            <Form.Field name="aadhaar">
-              <Form.Label className="mb-1 block font-medium">Aadhaar Number</Form.Label>
-              <div className="relative flex items-center gap-2">
-                <Form.Control asChild>
-                  <Input
-                    maxLength={14}
-                    inputMode="numeric"
-                    type="text"
-                    value={formData.aadhaar}
-                    onChange={(e) => {
-                      const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 12)
-                      const formatted = digitsOnly.replace(/(\d{4})(?=\d)/g, "$1 ")
-                      handleChange("aadhaar", formatted)
-                    }}
-                  />
-                </Form.Control>
-                {formData.aadhaar.replace(/\s/g, "").length === 12 && <Check className="text-green-600 absolute right-3" size={18} />}
-              </div>
-              {errors.aadhaar && <p className="text-sm text-error">{errors.aadhaar}</p>}
-            </Form.Field>
+            {userType === USERS.GOVT_OFFICIAL && (
+              <>
+                <FormField
+                  name="idCardNo"
+                  label="ID Card No."
+                  value={formData.idCardNo}
+                  onChange={handleChange}
+                  error={errors.idCardNo}
+                  placeholder="Enter ID number"
+                  className="w-full"
+                />
+                <FormField
+                  name="validTill"
+                  type="month"
+                  label="Valid Till (MM/YY)"
+                  value={formData.validTill}
+                  onChange={handleChange}
+                  error={errors.validTill}
+                  placeholder="Month/Year"
+                  className="w-full"
+                />
+              </>
+            )}
+
+            <div className="space-y-2 md:col-span-3">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.isDisabled}
+                  onChange={(e) => handleChange("isDisabled", e.target.checked)}
+                  className="accent-brand-600"
+                />
+                <span className="text-sm">
+                  Identify as a Person with a Disability?
+                  <span className="text-muted-foreground ml-1 italic">(check for yes)</span>
+                </span>
+              </label>
+
+              {formData.isDisabled && (
+                <FormField
+                  name="pwdId"
+                  label="PwD ID"
+                  value={formData.pwdId}
+                  onChange={handleChange}
+                  error={errors.pwdId}
+                  placeholder="Enter PwD ID"
+                  className="w-full md:w-1/2"
+                />
+              )}
+            </div>
           </div>
 
           <DialogFooter>

@@ -9,7 +9,7 @@ export const PassengersList = ({ passengers }) => {
   }
 
   return (
-    <div className="h-[70vh] w-full space-y-4 overflow-y-scroll md:h-[50vh]">
+    <div className=" w-full space-y-4 overflow-y-scroll ">
       {list.map((person, index) => (
         <div key={index} className="flex items-center  justify-between gap-10 rounded-md border p-4 shadow-sm">
           <div className="items center grid w-full grid-cols-1 md:grid-cols-3">
