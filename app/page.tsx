@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { H3 } from "@/components/ui/typography"
+import "@/styles/page.scss"
 
 export const portOptions = [
   { location: "Kochi", icon: "directions_boat" },
