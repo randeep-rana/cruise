@@ -1,0 +1,12 @@
+.convenienceFeesAccordion {
+  button {
+    justify-content: start;
+    gap: 15px;
+  }
+
+  .convenienceFeesAccordionRow {
+    p:first-child {
+      color: #585858;
+    }
+  }
+}

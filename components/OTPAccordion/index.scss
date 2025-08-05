@@ -1,0 +1,46 @@
+.optAccordion {
+  .otpHeading {
+    @apply flex flex-col items-start;
+    .heading {
+      font-size: 32px;
+      line-height: 36px;
+      color: #112211;
+    }
+  }
+  .hover\:underline:hover {
+    text-decoration-line: none;
+  }
+  .contentHeading {
+    h4 {
+      padding: 10px 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      /* or 143% */
+
+      letter-spacing: 0.25px;
+
+      /* material-theme/sys/light/on-primary-container */
+
+      color: #2e1500;
+    }
+    p {
+      padding: 10px 0;
+      font-size: 16px;
+      line-height: 24px;
+      /* or 150% */
+
+      letter-spacing: 0.15px;
+
+      color: #2e1500;
+    }
+    p.timer {
+      color: #3d5ba9;
+    }
+  }
+  button.submit {
+    background: #745943;
+    border-radius: 4px;
+  }
+}

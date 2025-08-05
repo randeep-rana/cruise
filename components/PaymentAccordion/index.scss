@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.timerContainer {
+  color: #2d3748;
+  .termsAndConditions {
+    color: #405aa9;
+  }
+  .priceDetailLink {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+    letter-spacing: 0.1px;
+    text-decoration-line: underline;
+
+    color: #0f172a;
+  }
+  p:first-child {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    letter-spacing: 0.5px;
+
+    /* Body text */
+
+    color: #2d3748;
+  }
+}
+
+.timerContent {
+  @apply bg-error-80;
+  padding: 10px;
+  margin: 40px 0;
+}
+
+.totalAmount {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+
+  letter-spacing: 0.15px;
+
+  color: #000000;
+  margin: 20px 0;
+}
+
+.paymentAccordion {
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+
+  /* Blackish Green */
+
+  color: #112211;
+  button[id="radix-:Rra5:"] {
+    font-size: 32px;
+    line-height: 36px;
+    color: #112211;
+  }
+  button:hover {
+    text-decoration-line: none;
+  }
+
+  .payConfirm {
+    width: 100%;
+    background: #745943;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    /* identical to box height, or 114% */
+
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+  }
+}

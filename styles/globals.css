@@ -1,0 +1,89 @@
+/* @import "tailwindcss"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-width: 360px;
+}
+
+html,
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+
+::-webkit-scrollbar {
+  /* WebKit */
+  display: none;
+  -webkit-appearance: none;
+}
+
+[data-invalid="true"] span {
+  @apply text-error animate-wobble text-xs;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+.goog-te-gadget {
+  visibility: hidden;
+}
+
+.goog-te-gadget span {
+  display: none;
+}
+
+.goog-te-gadget div {
+  visibility: visible !important;
+}
+
+#google_translate_element select {
+  font-size: large;
+  color: rgb(71, 85, 105);
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  #google_translate_element select {
+    font-size: medium;
+  }
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
+}
+
+/* .goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+.goog-te-gadget {
+  font-size: 0;
+  height: 0;
+}
+#google_translate_element  {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+} */
+
+::-ms-reveal {
+  filter: invert(100%);
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  outline: none;
+}
+
+@layer base {
+  .font-outline-2 {
+    -webkit-text-stroke: 2px black;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px black;
+  }
+}

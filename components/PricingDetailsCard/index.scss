@@ -1,0 +1,28 @@
+.pricingDetailCard {
+  background: #ffffff;
+  box-shadow: 0px 3.41487px 13.6595px rgba(17, 34, 17, 0.05);
+  border-radius: 8px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 20px;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+    letter-spacing: 0.1px;
+
+    /* Blackish Green */
+
+    color: #112211;
+  }
+}
