@@ -74,7 +74,7 @@ const CheckInForm = () => {
           <Form.Message match={"patternMismatch"}>Please enter a valid 10 digit PNR number</Form.Message>
         </Form.Field>
         <Form.Submit asChild className="block w-full bg-primary">
-          <Button variant='outline' disabled={disableForm}>CHECK IN</Button>
+          <Button className='text-white' disabled={disableForm}>CHECK IN</Button>
         </Form.Submit>
       </Form.Root>
     </>
