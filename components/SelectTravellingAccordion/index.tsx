@@ -57,7 +57,7 @@ export function SelectTravellingAccordion({
   const hasPassengers = cart.adultPassengers.length > 0
 
   return (
-    <AccordionItem value="step-5" className="my-4 rounded-lg p-4 shadow-md" onClick={() => setStep?.("step-1")}>
+    <AccordionItem value="step-1" className="my-4 rounded-lg p-4 shadow-md" onClick={() => setStep?.("step-1")}>
       <AccordionTrigger className="text-primaryLakshadweep-700">
         <div className="flex flex-col">
           <div className="flex items-center">

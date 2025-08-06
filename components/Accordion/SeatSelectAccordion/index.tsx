@@ -44,7 +44,7 @@ const SeatLayoutAccordion = () => {
   }
 
   return (
-    <AccordionItem value="step-1" disabled={false} className="my-4 rounded-lg text-left shadow-md">
+    <AccordionItem value="step-2" disabled={false} className="my-4 rounded-lg text-left shadow-md">
       <AccordionTrigger className="mb-2 pr-4 text-primaryLakshadweep-700">
         <div className="flex flex-col px-4 pt-2">
           <div className="flex place-content-start items-center">

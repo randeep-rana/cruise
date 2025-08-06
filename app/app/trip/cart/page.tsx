@@ -233,9 +233,9 @@ const ShipCart = () => {
                 setStep={setStep}
               />
 
-              <ContactInfoAccordion handleContactInformationProceed={handleContactInformationProceed} />
-
               <SeatLayoutAccordion />
+
+              <ContactInfoAccordion handleContactInformationProceed={handleContactInformationProceed} />
 
               <PaymentAccordion bookingData={smapleBookingData} userInfo={userInfo} clearCart={handleReplan} disabled={cart.step !== "step-3"} />
 

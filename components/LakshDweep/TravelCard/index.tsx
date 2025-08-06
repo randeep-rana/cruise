@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { Image } from '@/components/ui/image'
 
 const { Ship } = require("lucide-react") as any
 
@@ -76,7 +76,7 @@ export default function TravelCard({
       <div className="hidden items-start gap-16 md:flex">
         {/* Left: Logo + Time + Locations */}
         <div className="flex items-center gap-4">
-          <img src={logoSrc} alt="Logo" className="size-10 object-contain" />
+          <Image src={logoSrc} alt="Logo" className="w-12 h-12 object-contain" />
 
           <div className="flex flex-col">
             <div className="flex items-start text-sm font-semibold text-black">

@@ -35,7 +35,7 @@ function SelectTravellingAccordionRowShip({ index, passengerDetail, isSelected, 
     <tr className={!checked && !disabled ? "border-b last:border-b-0" : ""}>
       <td className="w-8 p-2">
         <Checkbox
-          className="data-[state=checked]:border-primaryLakshadweep-700 data-[state=indeterminate]:border-primaryLakshadweep-700 data-[state=checked]:bg-white data-[state=indeterminate]:bg-white"
+          className="w-5 h-5 data-[state=checked]:border-primary-700 data-[state=indeterminate]:border-primary-700 data-[state=checked]:bg-white data-[state=indeterminate]:bg-white"
           id={name}
           checked={checked}
           onClick={handleClick}
@@ -64,7 +64,7 @@ function SelectTravellingAccordionRowShip({ index, passengerDetail, isSelected, 
         <div className="flex flex-col">
           {pwdId && (
             <>
-              <span className="text-base font-medium text-primaryLakshadweep-900">PwD ID</span>
+              <span className="text-base font-medium text-primary-900">PwD ID</span>
               <span className="text-base font-normal">{pwdId}</span>
             </>
           )}
@@ -73,7 +73,7 @@ function SelectTravellingAccordionRowShip({ index, passengerDetail, isSelected, 
 
       <td className="p-2 text-right align-middle">
         <div className="text-xs text-gray-600">
-          <span className="text-base font-medium text-primaryLakshadweep-900">Relation</span>
+          <span className="text-base font-medium text-primary-900">Relation</span>
           <br />
           <span className="text-base font-normal">{relation}</span>
         </div>

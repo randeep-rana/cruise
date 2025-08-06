@@ -24,7 +24,7 @@ const ContactInfoAccordion = ({ handleContactInformationProceed }) => {
   }
 
   return (
-    <AccordionItem value="step-2" disabled={false} className="my-4 rounded-lg p-4 text-left shadow-md">
+    <AccordionItem value="step-3" disabled={false} className="my-4 rounded-lg p-4 text-left shadow-md">
       <AccordionTrigger className="text-primaryLakshadweep-700">
         <div className="flex flex-col">
           <div className="flex place-content-start items-center">

@@ -44,13 +44,10 @@ module.exports = {
         600: "#00A7C5",
       },
       primary: {
-        DEFAULT: "#235daf",
+        DEFAULT: "#00A7C5",
         80: "#b3c5ff",
         40: "#e3e5f3",
         100: "#DAE2FF",
-      },
-      primaryLakshadweep: {
-        DEFAULT: "#00A7C5",
         600: "#00A7C5",
         700: "#00839A",
         900: "#004D5B",

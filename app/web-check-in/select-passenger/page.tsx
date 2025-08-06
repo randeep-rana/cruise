@@ -48,7 +48,7 @@ const SelectPassenger = () => {
       <Image src={DockYardShip} alt="Dockyard Ship" className="h-60 w-full object-cover object-center" />
       <div className="container bg-white">
         <div className="my-10 max-w-4xl bg-white p-6">
-          <h2 className="mb-6 text-[32px] font-medium text-primaryLakshadweep-600">Passengers List</h2>
+          <h2 className="mb-6 text-[32px] font-medium text-primary-600">Passengers List</h2>
 
           {/* Passenger Rows */}
           <div className="divide-y">
@@ -62,7 +62,7 @@ const SelectPassenger = () => {
                 {/* Checkbox */}
                 <div className="flex justify-center pb-7">
                   <Checkbox
-                    className="data-[state=checked]:border-primaryLakshadweep-700 data-[state=indeterminate]:border-primaryLakshadweep-700 data-[state=checked]:bg-white data-[state=indeterminate]:bg-white"
+                    className="data-[state=checked]:border-primary-700 data-[state=indeterminate]:border-primary-700 data-[state=checked]:bg-white data-[state=indeterminate]:bg-white"
                     checked={selected.includes(passenger.id)}
                     onCheckedChange={() => toggleSelection(passenger.id)}
                   />
@@ -70,7 +70,7 @@ const SelectPassenger = () => {
 
                 {/* Passenger Info */}
                 <div className="flex flex-col gap-1">
-                  <p className="font-medium text-primaryLakshadweep-900">{passenger.name}</p>
+                  <p className="font-medium text-primary-900">{passenger.name}</p>
                   <div className="flex gap-4 text-sm text-gray-600">
                     <div className="flex w-[90px] items-center gap-1">
                       <span className="material-icons text-base">account_circle</span>
@@ -88,7 +88,7 @@ const SelectPassenger = () => {
 
                 {/* Seat No */}
                 <div>
-                  <div className="text-primaryLakshadweep-900">Seat No.</div>
+                  <div className="text-primary-900">Seat No.</div>
                   <div className="text-cyan-600 mt-1 text-sm font-medium">{passenger.seat}</div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ const SelectPassenger = () => {
             <Button
               variant="outline"
               onClick={selectAll}
-              className="border-cyan-600 hover:bg-cyan-50 border-primaryLakshadweep text-primaryLakshadweep"
+              className="border-cyan-600 hover:bg-cyan-50 border-primary text-primary"
             >
               {selected.length === passengersData.length ? "DESELECT ALL" : "SELECT ALL"}
             </Button>
@@ -122,7 +122,7 @@ const SelectPassenger = () => {
             <Button
               variant={"default"}
               disabled={false}
-              className="rounded-md bg-primaryLakshadweep-700  px-6 font-medium text-white hover:bg-white/30"
+              className="rounded-md bg-primary-700  px-6 font-medium text-white hover:bg-white/30"
               onClick={handleClickProceed}
             >
               PROCEED
