@@ -94,3 +94,11 @@ export const passwordRules = [
     check: (val: string) => /[!@#$%^&*(),.?":{}|<>]/.test(val),
   },
 ]
+
+export const USERS = {
+  TOURIST: "tourist",
+  RESIDENT: "resident",
+  NON_RESIDENT: "non-resident",
+  GOVT_OFFICIAL: "official",
+  STUDENT: "student",
+}

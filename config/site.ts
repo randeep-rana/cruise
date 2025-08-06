@@ -96,3 +96,7 @@ export const metaConfig: Metadata = {
     },
     // url: "https://heliyatra.irctc.co.in",
 }
+
+export const LakshdweepInfo = {
+  text: "Book safe, official passenger ferries to every island in minutes.",
+}
