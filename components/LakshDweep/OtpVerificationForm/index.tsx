@@ -1,7 +1,6 @@
 "use client"
 
 import { use, useEffect, useState } from "react"
-import { useLakshStore } from "@/store"
 import * as Form from "@radix-ui/react-form"
 
 import { FormHeading } from "@/components/login-form"
@@ -16,7 +15,6 @@ interface Props {
 export default function OtpVerificationForm({ onVerify, isVerifying = false }: Props) {
   const [otp, setOtp] = useState("")
   const [timer, setTimer] = useState(10)
-  const { mobile } = useLakshStore()
   useEffect(() => {
     if (timer === 0) return
     const interval = setInterval(() => setTimer((t) => t - 1), 1000)
@@ -40,7 +38,7 @@ export default function OtpVerificationForm({ onVerify, isVerifying = false }: P
       <FormHeading heading="Email & Mobile Verification" className=" mb-4 text-3xl" />
 
       <p className="mb-4 text-center text-sm text-gray-600">
-        Enter the code from SMS sent to <p className="mt-2 font-semibold text-black">+91 {mobile}</p>
+        Enter the code from SMS sent to <p className="mt-2 font-semibold text-black">+91 {"XXXXXXXXXX`"}</p>
       </p>
 
       <Form.Root onSubmit={handleSubmit} className="space-y-4">

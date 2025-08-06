@@ -157,8 +157,8 @@ export default function UnifiedSignupForm() {
             return
           }
           toast.success(signupData)
-          
           setShowOtpScreen(true)
+          
           
         })
     

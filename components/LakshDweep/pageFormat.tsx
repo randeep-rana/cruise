@@ -1,6 +1,6 @@
 "use client"
 
-import lakshadweep from "@/public/lakshadweep.png"
+import lakshadweep from "@/public/images/lakshadweep.png"
 
 type Props = {
   textDirection?: "left" | "top" | "right"
