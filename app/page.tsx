@@ -3,8 +3,7 @@
 import React, { useRef, useState } from "react"
 import NextImage from "next/image"
 import { useRouter } from "next/navigation"
-import { MP_LOCATIONS } from "@/constant/mp_tourism"
-import useCart from "@/hooks/cart/useCart"
+import useCart from "@/hooks/useCart"
 import { useRequest } from "@/hooks/useRequest"
 import useTanstackQuery from "@/hooks/useTanstackQuery"
 import ShipImage from "@/public/images/lakshadweep-ship.png"
@@ -16,19 +15,15 @@ import { BaggageRulesCard } from "@/components/BaggageRulesCard"
 import CheckInCard from "@/components/CheckInCard"
 import { DeclarationModal } from "@/components/DeclarationModal"
 import PassengersCount from "@/components/InputFields/PassengersCount"
-// import BookingCard from "./BookingCard"
-
-import SlotSelect from "@/components/LakshDweep/SlotSelect"
-import TravelCard from "@/components/LakshDweep/TravelCard"
-// import TravelInfoFooter from "@/components/TravelInfoFooter"
+import TravelCard from "@/components/TravelCard"
 import ToggleGroup from "@/components/ui/Toggler"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { H2, H3, List, P } from "@/components/ui/typography"
-
-// import SlotsCard, { BookingIdCard, NewSlotsCard } from "./SlotsCard"
+import { H3 } from "@/components/ui/typography"
+import "@/styles/page.scss"
+import SlotSelect from "@/components/LakshDweep/SlotSelect"
 
 export const portOptions = [
   { location: "Kochi", icon: "directions_boat" },
@@ -38,7 +33,6 @@ export const portOptions = [
 ]
 
 const Lakshadweep = () => {
-  const { clearCart } = useCart()
   const { get } = useRequest()
   const toastId = useRef(null)
   const [selectedTravelDate, setSelectedTravelDate] = useState("")
@@ -50,6 +44,7 @@ const Lakshadweep = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeclarationModalOpen, setIsDeclarationModalOpen] = useState(false)
   const [showSampleData, setSampleData] = useState(false)
+
   const formRef = useRef(null)
   const onwardsDateInputRef = useRef(null)
   const router = useRouter()
@@ -88,22 +83,8 @@ const Lakshadweep = () => {
       toastId.current = toast.error("Please add no. of passengers")
       return
     }
-
-    const getDestinationId = (location: string) => {
-      return MP_LOCATIONS.find((d) => d.value === location)?.id
-    }
-
-    setDetails({
-      ...details,
-      ...formData,
-      ...passengers,
-      tenantId: "23e4",
-      returnType: ticketQuota,
-      destinationId: getDestinationId(departureLocation),
-      returnDate: ticketQuota === "general" ? `${formData.returnDate}` : undefined,
-    })
-    clearCart(false)
     setSampleData(true)
+    // router.push("/app/trip/slot-select")
   }
 
   const {
